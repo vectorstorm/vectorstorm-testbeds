@@ -1,0 +1,38 @@
+Sprite
+{
+	Name "Player"
+	Fragment
+	{
+		Material "PlayerBody"
+		VertexBuffer
+		{
+			-0.25 -1.5 0
+			0.25 -1.5 0
+			-0.25 0 0
+			0.25 0 0
+		}
+		DisplayList
+		{
+			BindVertexBuffer 0
+			TriangleStrip 0 1 2 3
+			ClearArrays
+		}
+	}
+	Fragment
+	{
+		Material "PlayerOutline"
+		VertexBuffer
+		{
+			-0.25 -1.5 0
+			0.25 -1.5 0
+			-0.25 0 0
+			0.25 0 0
+		}
+		DisplayList
+		{
+			BindVertexBuffer 0
+			LineStrip 0 1 3 2 0
+			ClearArrays
+		}
+	}
+}

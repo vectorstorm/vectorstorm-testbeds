@@ -1,0 +1,93 @@
+VertexArray{
+	-10 0
+	-30 0
+	-30 -10
+	-20 -30
+	-10 -30
+	15 -30
+	40 30
+	-10 30
+
+    4 -40
+	8 -30
+
+	25 -10
+	40 -8
+	32 10
+
+	0 -8
+	12 0
+	0 14
+
+	-20 -10
+	-5 -24
+	-10 -12
+}
+#SetColor 0 .1 0 1
+#TriangleFan 0 1 2 3 4 5 6 7
+#TriangleList 4 8 9
+#TriangleList 10 11 12
+
+SetColor 0 1 0 1
+LineStrip 1 2 3 4 5 6 7
+LineStrip 4 8 9
+LineStrip 10 11 12
+LineStrip 13 14 15
+
+#SetColor .2 0 0 1
+#TriangleList 16 17 18
+SetColor .5 0 0 1
+LineStrip 16 17 18 16
+
+
+#muncher Leg
+VertexArray{
+	20	10
+	20	40
+	-10 40
+}
+
+#SetColor 0.05 0.0 0 1
+#TriangleList 0 1 2
+SetColor 0 1 0 1
+LineStrip 0 1 2 0
+
+
+#muncher mouth
+VertexArray{
+	-10 30
+	-30 10
+	-10 10
+	-10 0
+	-30 0
+
+	-28 10
+	-26 6
+	-24 10
+
+	-24 0
+	-22 5
+	-20 0
+}
+
+#SetColor 0 .1 0 1
+#TriangleList 0 1 2
+SetColor 0 1 0 1
+LineStrip 0 1 2 3 4
+
+SetColor 1 1 1 1
+LineStrip 5 6 7
+LineStrip 8 9 10
+
+#muncher tail
+
+VertexArray{
+	40 30
+	70 15
+	80 30
+}
+#SetColor 0 0.05 0 1
+#TriangleList 0 1 2
+
+SetColor 0 1 0 1
+LineStrip 0 1 2 0

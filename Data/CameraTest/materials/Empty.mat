@@ -1,0 +1,11 @@
+Material{
+	name white
+	mode normal
+	color 1 1 1 1.0
+	culling none
+	zread true
+	zwrite false
+	texture "DarkDirt.png"
+	glow false
+}
+

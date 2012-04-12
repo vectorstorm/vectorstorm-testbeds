@@ -1,0 +1,8 @@
+Material{
+	mode normal
+	color 0.0 0.0 1.0 1.0
+	culling back
+	zread true
+	zwrite true
+}
+

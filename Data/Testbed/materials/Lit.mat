@@ -1,0 +1,8 @@
+Material{
+	name white
+	mode lit
+	color 1.0 1.0 1.0 1.0
+	specular 1.0 1.0 1.0 1.0
+	culling back
+}
+

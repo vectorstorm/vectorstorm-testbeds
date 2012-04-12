@@ -1,0 +1,7 @@
+MoveTo 0.0 -10.0
+LineTo 5.0 -5.0
+LineTo 5.0 5.0
+LineTo 0.0 10.0
+LineTo -5.0 5.0
+LineTo -5.0 -5.0
+LineTo 0.0 -10.0

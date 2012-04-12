@@ -1,0 +1,9 @@
+MoveTo -200.0 -20.0
+LineTo 200.0 -20.0
+LineTo 205.0 -15.0
+LineTo 205.0 15.0
+LineTo 200.0 20.0
+LineTo -200.0 20.0
+LineTo -205.0 15.0
+LineTo -205.0 -15.0
+LineTo -200.0 -20.0

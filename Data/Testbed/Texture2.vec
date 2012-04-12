@@ -1,0 +1,17 @@
+VertexArray{
+	-100 -100
+	100 -100
+	100 100
+	-100 100
+}
+TexelArray{
+	0 0
+	1 0
+	1 1
+	0 1
+}
+
+SetColor 0.0 0.0 1.0 1.0
+SetTexture "Texture2.png"
+TriangleFan 0 1 2 3
+ClearTexture

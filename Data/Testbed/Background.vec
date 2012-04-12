@@ -1,0 +1,19 @@
+VertexArray{
+	-1000	-600
+	-1000	600
+	1000	600
+	1000	-600
+}
+
+ColorArray{
+	0 0 0.2 1
+	.2 .2 .5 1
+	.2 .2 .5 1
+	0 0 0.2 1
+}
+
+TriangleStrip 0 1 3 2
+
+ClearColorArray
+ClearVertexArray
+

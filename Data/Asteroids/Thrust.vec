@@ -1,0 +1,4 @@
+MoveTo 0.0 -0.50
+LineTo 0.0 0.50
+MoveTo 0.50 0.0
+LineTo -0.50 0.0
