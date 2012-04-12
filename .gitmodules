@@ -1,0 +1,3 @@
+[submodule "vectorstorm"]
+	path = vectorstorm
+	url = git://github.com/vectorstorm/vectorstorm.git
