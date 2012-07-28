@@ -34,27 +34,27 @@ vsPhysicsSprite( vsDisplayList::Load("PlayerShip"), 1.0f, ColFlag_Player, ColFla
 
 	m_thrust->SetColor(vsColor::Red);
 	AddChild( m_thrust );
-	m_thrust->m_transform.m_position.Set(0,9);
+	m_thrust->m_transform.SetTranslation(0,9);
 
 	AddChild( m_leftAttitude );
 	AddChild( m_rightAttitude );
 	AddChild( m_leftRearAttitude );
 	AddChild( m_rightRearAttitude );
 
-	m_leftAttitude->m_transform.m_position.Set( 5.0f, -8.0f );
-	m_leftAttitude->m_transform.m_angle.Set( DEGREES(30.0f) );
-	m_leftRearAttitude->m_transform.m_position.Set( 12.0f, 8.0f );
-	m_leftRearAttitude->m_transform.m_angle.Set( DEGREES(-30.0f) );
-	//	m_leftAttitude->m_transform.m_position.Set( 7.5, 0 );
+	m_leftAttitude->m_transform.SetTranslation( 5.0f, -8.0f );
+	m_leftAttitude->m_transform.SetAngle( DEGREES(30.0f) );
+	m_leftRearAttitude->m_transform.SetTranslation( 12.0f, 8.0f );
+	m_leftRearAttitude->m_transform.SetAngle( DEGREES(-30.0f) );
+	//	m_leftAttitude->m_transform.SetTranslation( 7.5, 0 );
 
-	m_rightAttitude->m_transform.m_position.Set( -5.0f, -8.0f );
-	m_rightAttitude->m_transform.m_angle.Set( DEGREES(-30.0f) );
-	//	m_rightAttitude->m_transform.m_position.Set( -7.5, 0 );
-	m_rightAttitude->m_transform.m_scale.Set(-1.0f,1.0f);
+	m_rightAttitude->m_transform.SetTranslation( -5.0f, -8.0f );
+	m_rightAttitude->m_transform.SetAngle( DEGREES(-30.0f) );
+	//	m_rightAttitude->m_transform.SetTranslation( -7.5, 0 );
+	m_rightAttitude->m_transform.SetScale(-1.0f,1.0f);
 
-	m_rightRearAttitude->m_transform.m_position.Set( -12.0f, 8.0f );
-	m_rightRearAttitude->m_transform.m_scale.Set(-1.0f,1.0f);
-	m_rightRearAttitude->m_transform.m_angle.Set( DEGREES(30.0f) );
+	m_rightRearAttitude->m_transform.SetTranslation( -12.0f, 8.0f );
+	m_rightRearAttitude->m_transform.SetScale(-1.0f,1.0f);
+	m_rightRearAttitude->m_transform.SetAngle( DEGREES(30.0f) );
 
 	m_isSpawned = false;
 
@@ -157,12 +157,12 @@ smxPlayerShip::HandleThrusters( float timeStep )
 		m_thrustAmt[i] = vsInterpolate( 0.15f, current, desired );
 	}
 
-	m_thrust->m_transform.m_scale.Set( m_thrustAmt[Thruster_Main], m_thrustAmt[Thruster_Main] );
-	m_leftAttitude->m_transform.m_scale.Set( m_thrustAmt[Thruster_Left], m_thrustAmt[Thruster_Left] );
-	m_rightAttitude->m_transform.m_scale.Set( -m_thrustAmt[Thruster_Right], m_thrustAmt[Thruster_Right] );
+	m_thrust->m_transform.SetScale( m_thrustAmt[Thruster_Main], m_thrustAmt[Thruster_Main] );
+	m_leftAttitude->m_transform.SetScale( m_thrustAmt[Thruster_Left], m_thrustAmt[Thruster_Left] );
+	m_rightAttitude->m_transform.SetScale( -m_thrustAmt[Thruster_Right], m_thrustAmt[Thruster_Right] );
 
-	m_rightRearAttitude->m_transform.m_scale.Set( -m_thrustAmt[Thruster_Left], m_thrustAmt[Thruster_Left] );
-	m_leftRearAttitude->m_transform.m_scale.Set( m_thrustAmt[Thruster_Right], m_thrustAmt[Thruster_Right] );
+	m_rightRearAttitude->m_transform.SetScale( -m_thrustAmt[Thruster_Left], m_thrustAmt[Thruster_Left] );
+	m_leftRearAttitude->m_transform.SetScale( m_thrustAmt[Thruster_Right], m_thrustAmt[Thruster_Right] );
 }
 
 void
@@ -215,7 +215,7 @@ smxPlayerShip::HandleSpawnTimer( float timeStep )
 		}
 
 		SetColor(c);
-		m_transform.m_scale = vsVector2D(scale,scale);
+		m_transform.SetScale( vsVector2D(scale,scale) );
 	}
 }
 
@@ -236,7 +236,7 @@ smxPlayerShip::Update( float timeStep )
 	if ( input->IsDown(CID_B) )
 	{
 		float acceleration = 300.0f;
-		AddForce( m_transform.m_angle.GetForwardVector() * acceleration /* lStick.y*/ * m_object->GetMass() );	// thrust
+		AddForce( m_transform.GetAngle().GetForwardVector() * acceleration /* lStick.y*/ * m_object->GetMass() );	// thrust
 		m_emitter->SetSpawnRate( 30.0f );
 	}
 	else
@@ -250,7 +250,7 @@ smxPlayerShip::Update( float timeStep )
 
 	Parent::Update( timeStep );
 
-	vsVector2D forwardVec = m_transform.m_angle.GetForwardVector();
+	vsVector2D forwardVec = m_transform.GetAngle().GetForwardVector();
 	m_emitter->SetSpawnPosition( GetPosition() - forwardVec * 30.0f, 10.0f );
 	m_emitter->SetSpawnColor( vsColor::Red );
 

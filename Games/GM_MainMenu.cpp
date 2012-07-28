@@ -112,20 +112,20 @@ gmMainMenu::Init()
 		m_menuSprite[i] = new vsSprite( vsDisplayList::Load("MenuFrame") );
 		m_menuSprite[i]->RegisterOnScene(0);
 
-		m_menuSprite[i]->m_transform.m_position.Set(0.0f, -250.0f + (90.0f * i));
-		m_menuSprite[i]->m_transform.m_scale.Set(1.5f, 1.5f);
+		m_menuSprite[i]->m_transform.SetTranslation(0.0f, -250.0f + (90.0f * i));
+		m_menuSprite[i]->m_transform.SetScale(1.5f, 1.5f);
 		//m_menuSprite[i]->SetShader(m_shader);
 
 		vsSprite *buttonImage = new vsSprite( vsBuiltInFont::CreateString( coreGameRegistry::GetGameName(i), 15.0f, 25.0f ) );
-		buttonImage->m_transform.m_position.Set(-190.0f, 0.0f);
+		buttonImage->m_transform.SetTranslation(-190.0f, 0.0f);
 		m_menuSprite[i]->AddChild(buttonImage);
 	}
 
 /*
 	m_buildName = new vsSprite(
 						   vsBuiltInFont::CreateString(coreVersion::GetVersionNameString(), 15.0f, 25.0f, Justification_Center) );
-	m_buildName->m_transform.m_position.Set(480.0f,340.0f);
-	m_buildName->m_transform.m_angle.Set(DEGREES(10.0f));
+	m_buildName->m_transform.SetTranslation(480.0f,340.0f);
+	m_buildName->m_transform.SetAngle(DEGREES(10.0f));
 	m_buildName->SetColor(vsColor(0.0f,0.0f,1.0f));
 	m_buildName->RegisterOnScene(0);
 */
@@ -172,7 +172,7 @@ gmMainMenu::BuildTitleSprite()
 	m_title = new vsSprite();
 
 	char title[12] = "VectorStorm";
-	m_title->m_transform.m_position.Set(-550.f, -350.f);
+	m_title->m_transform.SetTranslation(-550.f, -350.f);
 
 	m_title->RegisterOnScene(0);
 
@@ -184,26 +184,26 @@ gmMainMenu::BuildTitleSprite()
 		{
 			m_letter[i] = new vsSprite( vsBuiltInFont::CreateCharacter(title[i], 30.0f, 120.0f) );
 
-			m_letter[i]->m_transform.m_position.Set(0.0f, 0.0f);
+			m_letter[i]->m_transform.SetTranslation(0.0f, 0.0f);
 			m_letter[i]->SetColor( vsColor::Blue );
 		}
 		else if ( i < 6 )	// in 'ector'
 		{
 			m_letter[i] = new vsSprite( vsBuiltInFont::CreateCharacter(title[i], 30.0f, 80.0f)/*, i * 0.2f*/ );
-			m_letter[i]->m_transform.m_position.Set(50.0f + i*35.0f,-70.0f);
+			m_letter[i]->m_transform.SetTranslation(50.0f + i*35.0f,-70.0f);
 			m_letter[i]->SetColor( vsColor::Blue );
 		}
 		else if ( i == 6 )	// in 'S'
 		{
 			m_letter[i] = new vsSprite( vsBuiltInFont::CreateCharacter(title[i], 30.0f, 120.0f) );
-			m_letter[i]->m_transform.m_position.Set(40.0f, 40.0f);
+			m_letter[i]->m_transform.SetTranslation(40.0f, 40.0f);
 			m_letter[i]->SetColor( vsColor::LightBlue );
 		}
 		else // in 'torm'
 		{
 			m_letter[i] = new mmStretchSprite( vsBuiltInFont::CreateCharacter(title[i], 40.0f, 80.0f), i * 0.2f );
 			int StormChar = i - 6;
-			m_letter[i]->m_transform.m_position.Set(60.0f + StormChar*50.0f, -30.0f);
+			m_letter[i]->m_transform.SetTranslation(60.0f + StormChar*50.0f, -30.0f);
 			m_letter[i]->SetColor( vsColor::LightBlue );
 		}
 
@@ -214,8 +214,8 @@ gmMainMenu::BuildTitleSprite()
 	{
 		m_stripes[i] = new vsSprite( vsDisplayList::Load("Stripes") );
 		m_stripes[i]->SetColor( vsColor::Yellow );
-		m_stripes[i]->m_transform.m_position.Set( -250.0f + (500.0f*i), 470.0f );
-		m_stripes[i]->m_transform.m_angle.Set( DEGREES(10.0f) );
+		m_stripes[i]->m_transform.SetTranslation( -250.0f + (500.0f*i), 470.0f );
+		m_stripes[i]->m_transform.SetAngle( DEGREES(10.0f) );
 		m_stripes[i]->RegisterOnScene(0);
 	}
 }
@@ -335,5 +335,5 @@ mmStretchSprite::Update( float timeStep )
 	scaleVal += 1.5f;										// [1.5 .. 2.5]
 	scaleVal *= 0.5f;										// [0.75 .. 1.25]
 
-	m_transform.m_scale.Set(1.0f,scaleVal);
+	m_transform.SetScale(1.0f,scaleVal);
 }

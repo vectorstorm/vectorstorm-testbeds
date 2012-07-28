@@ -201,10 +201,10 @@ add_executable(
 	)
 
 if (UNIX)
-	set(CMAKE_CXX_FLAGS_DEBUG "-include VS_VectorStorm_Debug.h -O0")
-	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-include VS_VectorStorm_Debug.h -O3")
-	set(CMAKE_CXX_FLAGS_RELEASE "-include VS_VectorStorm.h -O3")
-	set(CMAKE_CXX_FLAGS_MINSIZEREL "-include VS_VectorStorm.h -Os")
+	set(CMAKE_CXX_FLAGS_DEBUG "-include VS_VectorStorm_Debug.h ${CMAKE_CXX_FLAGS_DEBUG}")
+	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-include VS_VectorStorm_Debug.h ${CMAKE_CXX_FLAGS_RELWITHDEBINFO}")
+	set(CMAKE_CXX_FLAGS_RELEASE "-include VS_VectorStorm.h ${CMAKE_CXX_FLAGS_RELEASE}")
+	set(CMAKE_CXX_FLAGS_MINSIZEREL "-include VS_VectorStorm.h ${CMAKE_CXX_FLAGS_MINSIZEREL}")
 else (UNIX)
 	add_definitions("/FI\"${PREFIX}\"")
 endif(UNIX)
@@ -235,6 +235,7 @@ IF(APPLE)
 		LINK_FLAGS -Wl,-rpath,@executable_path/../Frameworks/
 		XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym"
 		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH "YES"
+        XCODE_ATTRIBUTE_FRAMEWORK_SEARCH_PATHS "/Library/Frameworks/"
 		#XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH_DEBUG "YES"
 		#XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH_RELEASE "NO"
 		)
@@ -260,6 +261,7 @@ install(TARGETS VectorStorm_Testbeds
 	ARCHIVE DESTINATION lib
 	)
 if(APPLE)
+	set_target_properties(VectorStorm_Testbeds PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist")
 	add_custom_command(TARGET VectorStorm_Testbeds
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Resources

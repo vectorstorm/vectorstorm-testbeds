@@ -32,7 +32,7 @@ astAsteroid::Spawn(const vsVector2D &where_in, const vsVector2D &baseVelocity, f
 		ry += where_in.y;
 
 		vsVector2D where(rx,ry);
-		vsVector2D nextPos = where + vsVector2D(2.0f,2.0f);
+		//vsVector2D nextPos = where + vsVector2D(2.0f,2.0f);
 		float radius = GetBoundingCircle().radius;
 		radius *= 2.0f;
 

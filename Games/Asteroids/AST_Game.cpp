@@ -74,7 +74,7 @@ astGame::Init()
 		float rx = vsRandom::GetFloat(-400.0f,400.0f);
 		float ry = vsRandom::GetFloat(-400.0f,400.0f);
 
-		m_star[i]->m_transform.m_position.Set( rx, ry );
+		m_star[i]->m_transform.SetTranslation(vsVector2D(rx,ry));
 		m_star[i]->RegisterOnScene(0);
 	}
 

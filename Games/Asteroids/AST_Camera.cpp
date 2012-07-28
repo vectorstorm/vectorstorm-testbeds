@@ -12,8 +12,8 @@
 
 astCamera::astCamera()
 {
-	m_transform.m_position.Set(0.0f,0.0f);
-	m_transform.m_scale.Set(80.0f,80.0f);	// we see 800 units around the position.  (vertically)
+	m_transform.SetTranslation(vsVector2D(0.0f,0.0f));
+	m_transform.SetScale(vsVector2D(80.0f,80.0f));	// we see 800 units around the position.  (vertically)
 	m_trackSprite = NULL;
 	m_trackPlayer = false;
 }
@@ -34,7 +34,7 @@ astCamera::Update(float timeStep)
 
 	if ( m_trackPlayer && m_trackSprite )
 	{
-		m_transform.m_position = vsInterpolate( 0.05f, m_transform.m_position, m_trackSprite->m_transform.m_position );
-		m_transform.m_angle = vsInterpolate( 0.05f, m_transform.m_angle, m_trackSprite->m_transform.m_angle );
+		m_transform.SetTranslation( vsInterpolate( 0.05f, m_transform.GetTranslation(), m_trackSprite->m_transform.GetTranslation() ) );
+		m_transform.SetAngle( vsInterpolate( 0.05f, m_transform.GetAngle(), m_trackSprite->m_transform.GetAngle() ) );
 	}
 }

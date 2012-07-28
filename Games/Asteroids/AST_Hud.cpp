@@ -74,7 +74,7 @@ astHud::_Draw( vsDisplayList *list )
 	BuildScoreLists();
 
 	vsTransform2D t = vsTransform2D::Zero;
-	t.m_position.Set(-460.f, -400.f);
+	t.SetTranslation( vsVector2D(-460.f, -400.f) );
 
 	list->SetColor( vsColor::Blue * m_opacity * m_opacity );	// ease in, slam out
 
@@ -87,13 +87,13 @@ astHud::_Draw( vsDisplayList *list )
 		list->Append(*m_playerShip);
 		list->PopTransform();
 
-		t.m_position += vsVector2D(50.f,0.f);
+		t.SetTranslation( t.GetTranslation() + vsVector2D(50.f,0.f) );
 	}
 
 	list->SetColor( vsColor::Blue * m_opacity );
 	if ( m_scoreList )
 	{
-		t.m_position.Set(-520.f, -440.f);
+		t.SetTranslation(vsVector2D(-520.f, -440.f));
 		list->PushTransform(t);
 		list->Append(*m_scoreList);
 		list->PopTransform();
@@ -101,7 +101,7 @@ astHud::_Draw( vsDisplayList *list )
 
 	if ( m_highScoreList )
 	{
-		t.m_position.Set(-40.f, -440.f);
+		t.SetTranslation(vsVector2D(-40.f, -440.f));
 		list->PushTransform(t);
 		list->Append(*m_highScoreList);
 		list->PopTransform();

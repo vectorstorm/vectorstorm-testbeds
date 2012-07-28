@@ -16,7 +16,7 @@ astModeGameOver::astModeGameOver( astGame *game ):
 {
 	m_gameOverSprite = new vsSprite(vsBuiltInFont::CreateString(vsString("Game Over"), 30.0f, 60.0f, Justification_Center));
 	m_gameOverSprite->SetColor( vsColor::Black );
-	m_gameOverSprite->m_transform.m_position.Set( 0.0f, 0.0f );
+	m_gameOverSprite->m_transform.SetTranslation( vsVector2D(0.0f, 0.0f) );
 }
 
 astModeGameOver::~astModeGameOver()
@@ -50,14 +50,14 @@ astModeGameOver::Update(float timeStep)
 		m_fade = vsMax(m_fade - (timeStep/c_fadeDuration), 0.0f);
 	else
 		m_fade = vsMin(m_fade + (timeStep/c_fadeDuration), 1.0f);
-	
+
 	m_timer += timeStep;
-	
+
 	m_gameOverSprite->SetColor( vsInterpolate( m_fade, vsColor::Black, vsColor::Red ) );
-	
+
 	if ( m_exitting && m_fade == 0.f )
 		m_game->SetModeTitleScreen();
-	
+
 	if ( !m_exitting && (m_game->GetInput()->WasPressed(CID_A) || m_timer > c_autoExitTime) )
 	{
 		m_game->RespawnAsteroids();
@@ -70,16 +70,16 @@ astModeGameOver::Update(float timeStep)
  {
  // if we haven't decided the game is over, put our "Game Over" message into the HUD and set
  // the 'game over' flag.
- 
- m_gameOverSprite->m_transform.m_position.Set( -160.0f, 0.0f );
+
+ m_gameOverSprite->m_transform.SetTranslation( -160.0f, 0.0f );
  m_gameOverSprite->RegisterOnScene(1);
- 
+
  m_gameOver = true;
  }
  else
  {
  // wait for the player to press 'A', and let them continue when they do.
- 
+
  }
  }
  }

@@ -425,8 +425,8 @@ vpDrawable::Draw( vsRenderQueue *queue )
 			else	// static
 			{
 				vsTransform2D t;
-				t.m_position = ( m_object[0]->GetPosition() );
-				t.m_angle = ( m_object[0]->GetAngle() );
+				t.SetTranslation( m_object[0]->GetPosition() );
+				t.SetAngle( m_object[0]->GetAngle() );
 
 				list->PushTransform(t);
 				list->VertexArray( m_samplePos, m_sampleCount );
