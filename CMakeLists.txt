@@ -164,7 +164,7 @@ set(PLATFORM_SOURCES)
 SET(PLATFORM_LIBRARIES)
 
 if ( APPLE )
-	SET( PLATFORM_SOURCES SDLMain.m )	
+	SET( PLATFORM_SOURCES osx/SDLMain.m )	
 	SET(PLATFORM_LIBRARIES ${COCOA_LIBRARY})
 endif ( APPLE )
 
@@ -261,7 +261,7 @@ install(TARGETS VectorStorm_Testbeds
 	ARCHIVE DESTINATION lib
 	)
 if(APPLE)
-	set_target_properties(VectorStorm_Testbeds PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist")
+	set_target_properties(VectorStorm_Testbeds PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/osx/Info.plist")
 	add_custom_command(TARGET VectorStorm_Testbeds
 		POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Resources
@@ -274,21 +274,21 @@ if(APPLE)
 		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Frameworks
 		)
 
-	LIST(GET SDL_LIBRARY 0 SDLONLY )
-	foreach( lib
-			${SDLONLY}
-			${SDLMIXER_LIBRARY}
-			${SDLIMAGE_LIBRARY}
-			${GLEW_LIBRARY}
-			${BOX2D_LIBRARY}
-			)
-		add_custom_command(TARGET VectorStorm_Testbeds
-			POST_BUILD
-			COMMAND cp -r ${lib} ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Frameworks/
-			COMMENT "Copying ${lib} into place"
-			)
-
-	endforeach()
+	# Do a proper app bundle on 'install', taking libraries from /usr/local/lib.
+	# (Note that this assumes that all our libraries will be found inside that
+	# directory tree.  Should probably extract the directories from our various
+	# library variables (SDL_LIBRARY, SDL_MIXER_LIBRARY, etc) and include those
+	# directories in the DIRS list as well, just to ensure that everything gets
+	# covered, even if people have installed those libraries in other odd places
+	# on OSX.  (Folks who have installed SDL etc. through MacPorts probably have
+	# these libraries located in /opt/local/lib or somewhere similar, for example)
+	set(BUNDLE "${CMAKE_CURRENT_BINARY_DIR}/VectorStorm_Testbeds.app")
+	set(DIRS "/usr/local/lib")
+	install(CODE "
+		set(BU_CHMOD_BUNDLE_ITEMS ON)
+		include(BundleUtilities)
+		fixup_bundle(\"${BUNDLE}\" \"\" \"${DIRS}\")
+		" COMPONENT Runtime)
 
 endif(APPLE)
 
