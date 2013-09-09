@@ -16,6 +16,7 @@ set(VS_LIBRARIES
 	${SDL_LIBRARY}
 	${SDL_IMAGE_LIBRARY}
 	${SDL_MIXER_LIBRARY}
+	${SDL_TTF_LIBRARY}
 	${PNG_LIBRARY}
 	${GLEW_LIBRARY}
 	${BOX2D_LIBRARY}
@@ -164,15 +165,15 @@ set(PLATFORM_SOURCES)
 SET(PLATFORM_LIBRARIES)
 
 if ( APPLE )
-	SET( PLATFORM_SOURCES osx/SDLMain.m )	
+	SET( PLATFORM_SOURCES osx/SDLMain.m )
 	SET(PLATFORM_LIBRARIES ${COCOA_LIBRARY})
 endif ( APPLE )
 
 include_directories( SYSTEM
 	${OPENGL_INCLUDE_DIR}
-	${SDL_INCLUDE_DIR} 
-	${SDLMIXER_INCLUDE_DIR}
-	${SDLIMAGE_INCLUDE_DIR}
+	${SDL_INCLUDE_DIR}
+	${SDL_MIXER_INCLUDE_DIR}
+	${SDL_IMAGE_INCLUDE_DIR}
 	${GLEW_INCLUDE_DIR}
 	${BOX2D_INCLUDE_DIR}
 	)
@@ -230,9 +231,10 @@ IF(APPLE)
 
 	set_target_properties(VectorStorm_Testbeds
 		PROPERTIES
-		INSTALL_RPATH "@executable_path/../Frameworks"
+		#INSTALL_RPATH "@executable_path/../Frameworks"
 		INSTALL_RPATH_USER_LINK_PATH TRUE
-		LINK_FLAGS -Wl,-rpath,@executable_path/../Frameworks/
+		#LINK_FLAGS -Wl
+		#LINK_FLAGS -Wl,-rpath,@executable_path/../Frameworks/
 		XCODE_ATTRIBUTE_DEBUG_INFORMATION_FORMAT "dwarf-with-dsym"
 		XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH "YES"
         XCODE_ATTRIBUTE_FRAMEWORK_SEARCH_PATHS "/Library/Frameworks/"
@@ -248,7 +250,7 @@ endif ( UNIX )
 
 target_link_libraries( VectorStorm_Testbeds
 	vectorstorm
-	${PLATFORM_LIBRARIES} 
+	${PLATFORM_LIBRARIES}
 	${VS_LIBRARIES}
 	)
 
@@ -267,11 +269,6 @@ if(APPLE)
 		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Resources
 		COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/Data ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Resources/
 		COMMENT "Copying Data files into place"
-		)
-
-	add_custom_command(TARGET VectorStorm_Testbeds
-		POST_BUILD
-		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CFG_INTDIR}/VectorStorm_Testbeds.app/Contents/Frameworks
 		)
 
 	# Do a proper app bundle on 'install', taking libraries from /usr/local/lib.

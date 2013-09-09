@@ -20,7 +20,7 @@ void
 astStar::Update(float timeStep)
 {
 	UNUSED(timeStep);
-	
+
 	vsVector2D v = GetPosition();
 	if ( m_camera->WrapAround( v, 0.f ) )
 		SetPosition(v);

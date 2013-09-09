@@ -65,16 +65,16 @@ astGame::Init()
 
 
 	// Add some stars, for frame of reference.
-	m_starCount = 6;
+	m_starCount = 600;
 	m_star = new astStar *[m_starCount];
+	vsVector3D tl = vsSystem::GetScreen()->GetScene(0)->GetTopLeftCorner();
+	vsVector3D br = vsSystem::GetScreen()->GetScene(0)->GetBottomRightCorner();
 	for ( int i = 0; i < m_starCount; i++ )
 	{
 		m_star[i] = new astStar(m_camera);
 
-		float rx = vsRandom::GetFloat(-400.0f,400.0f);
-		float ry = vsRandom::GetFloat(-400.0f,400.0f);
-
-		m_star[i]->m_transform.SetTranslation(vsVector2D(rx,ry));
+		vsVector3D where = vsRandom::GetVector2D(tl,br);
+		m_star[i]->m_transform.SetTranslation(where);
 		m_star[i]->RegisterOnScene(0);
 	}
 

@@ -13,7 +13,7 @@
 astCamera::astCamera()
 {
 	m_transform.SetTranslation(vsVector2D(0.0f,0.0f));
-	m_transform.SetScale(vsVector2D(80.0f,80.0f));	// we see 800 units around the position.  (vertically)
+	SetFieldOfView(80.f);	// we see 80 units around the position.  (vertically)
 	m_trackSprite = NULL;
 	m_trackPlayer = false;
 }
