@@ -1,0 +1,13 @@
+Material{
+	name innerwall
+	mode normal
+	color 1.0 1.0 1.0 1.0
+	culling none
+	zread true
+	zwrite false
+	texture "Dirt.png"
+	layer 100
+	glow false
+}
+
+
