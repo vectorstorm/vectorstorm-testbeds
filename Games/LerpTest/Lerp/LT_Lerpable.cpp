@@ -48,5 +48,7 @@ ltLerpable::RebuildGraphics()
 	}
 
 	ClearFragments();
-	AddFragment( m_font->CreateString_Fragment( FontContext_2D, m_name, 35.f, Justification_Left, -1, color) );
+	vsFontRenderer fr(m_font, 35.f);
+	fr.SetColor(color);
+	AddFragment( fr.Fragment2D( m_name ) );
 }

@@ -13,12 +13,12 @@ void
 ctSafeZone::Draw( vsRenderQueue *queue )
 {
 	vsScene *scene = queue->GetScene();
-	
+
 	vsBox2D box( scene->GetTopLeftCorner(), scene->GetBottomRightCorner() );
-	
+
 	float marginSize = box.Height() * 0.1f;
 	box.Expand( marginSize );
-	
+
 	vsVector3D v[4] =
 	{
 		vsVector2D(box.GetMin().x, box.GetMin().y),
@@ -27,10 +27,10 @@ ctSafeZone::Draw( vsRenderQueue *queue )
 		vsVector2D(box.GetMax().x, box.GetMax().y)
 	};
 	int i[5] = {0, 1, 3, 2, 0};
-	
+
 	vsDisplayList *list = queue->GetGenericList();
-	
+
 	list->VertexArray(v,4);
-	list->LineStrip(i,5);
+	list->LineStripArray(i,5);
 	list->ClearVertexArray();
 }

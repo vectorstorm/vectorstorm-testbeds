@@ -10,10 +10,11 @@
 #ifndef FM_FONTMAKER_H
 #define FM_FONTMAKER_H
 
+#if 0
 class fmFontMaker : public coreGame
 {
 	typedef coreGame Parent;
-	
+
 	vsFont *		m_font;
 	vsFont *		m_fontB;
 	vsFont *		m_fontC;
@@ -23,18 +24,19 @@ class fmFontMaker : public coreGame
 	vsSprite *		m_final;
 
 	vsSprite *		m_muncher;
-	
+
 public:
-	
+
 					fmFontMaker();
 	virtual			~fmFontMaker();
-	
+
 	virtual void	Init();
 	virtual void	Deinit();
-	
+
 	virtual void	Update( float timeStep );
 };
 
+#endif
 
 #endif // FM_FONTMAKER_H
 

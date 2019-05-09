@@ -430,7 +430,7 @@ vpDrawable::Draw( vsRenderQueue *queue )
 
 				list->PushTransform(t);
 				list->VertexArray( m_samplePos, m_sampleCount );
-				list->LineStrip( m_optimisedIndex, m_optimisedIndexCount );
+				list->LineStripArray( m_optimisedIndex, m_optimisedIndexCount );
 				list->PopTransform();
 			}
 			//list->SetShader(NULL);

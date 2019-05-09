@@ -45,7 +45,7 @@ public:
 
 			list->SetColor(vsColor::Red);
 			list->VertexArray(v,4);
-			list->TriangleFan(tf,4);
+			list->TriangleFanArray(tf,4);
 //			list->MoveTo(tl);
 //			list->LineTo(br);
 		}

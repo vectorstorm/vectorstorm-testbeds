@@ -355,7 +355,7 @@ prefGame::ResetValues()
 
 	for ( int i = 0; i < m_controlCount; i++ )
 	{
-		m_deviceControl[i] = *GetInput()->GetControlMapping( s_cid[i] );
+		// m_deviceControl[i] = *GetInput()->GetControlMapping( s_cid[i] );
 	}
 
 	SetValues();
@@ -383,32 +383,32 @@ prefGame::MakeControlString(int control)
 {
 	vsString result = vsEmptyString;
 
-	DeviceControl *dc = &m_deviceControl[control];
-
-	if ( dc->type == CT_None )
-		result = "Unmapped";
-	else
-	{
-		vsString dirStr[CD_MAX+1] =
-		{
-			"+", //CD_Positive,
-			"-", //CD_Negative,
-
-			"[Up]",		//CD_Hat_Up,
-			"[Right]",	//CD_Hat_Right,
-			"[Down]",	//CD_Hat_Down,
-			"[Left]",	//CD_Hat_Left,
-		};
-
-		if (dc->type == CT_Axis )
-			result = vsFormatString("Axis %d %s", dc->cid, dirStr[dc->dir].c_str());
-		else if ( dc->type == CT_Button )
-			result = vsFormatString("Button %d", dc->cid);
-		else if ( dc->type == CT_Hat )
-			result = vsFormatString("Hat %d %s", dc->cid, dirStr[dc->dir].c_str());
-		else
-			result = "ERROR:  Unknown control type!";
-	}
+	// DeviceControl *dc = &m_deviceControl[control];
+    //
+	// if ( dc->type == CT_None )
+	// 	result = "Unmapped";
+	// else
+	// {
+	// 	vsString dirStr[CD_MAX+1] =
+	// 	{
+	// 		"+", //CD_Positive,
+	// 		"-", //CD_Negative,
+    //
+	// 		"[Up]",		//CD_Hat_Up,
+	// 		"[Right]",	//CD_Hat_Right,
+	// 		"[Down]",	//CD_Hat_Down,
+	// 		"[Left]",	//CD_Hat_Left,
+	// 	};
+    //
+	// 	if (dc->type == CT_Axis )
+	// 		result = vsFormatString("Axis %d %s", dc->cid, dirStr[dc->dir].c_str());
+	// 	else if ( dc->type == CT_Button )
+	// 		result = vsFormatString("Button %d", dc->cid);
+	// 	else if ( dc->type == CT_Hat )
+	// 		result = vsFormatString("Hat %d %s", dc->cid, dirStr[dc->dir].c_str());
+	// 	else
+	// 		result = "ERROR:  Unknown control type!";
+	// }
 
 	return result;
 }
@@ -416,36 +416,36 @@ prefGame::MakeControlString(int control)
 void
 prefGame::SetValues()
 {
-	vsSystemPreferences *p = vsSystem::Instance()->GetPreferences();
-
-	vsString resolutionValue;
-	Resolution * resArray = p->GetSupportedResolutions();
-
-	resolutionValue = vsFormatString("%dx%d", resArray[m_resolution].width, resArray[m_resolution].height);
-	if ( m_resolution > 0 )
-		resolutionValue = "<" + resolutionValue;
-	else
-		resolutionValue = " " + resolutionValue;
-	if ( m_resolution < m_resolutionCount-1 )
-		resolutionValue += ">";
-
-	m_screenMenu->SetItemValue(Screen_Resolution, resolutionValue);
-
-
-	vsString fullscreenValue = m_fullscreen?"<ON>":"<OFF>";
-	m_screenMenu->SetItemValue(Screen_Fullscreen, fullscreenValue);
-
-
-	vsString bloomValue = m_bloom?"<ON>":"<OFF>";
-	m_screenMenu->SetItemValue(Screen_Bloom, bloomValue);
-
-
-	m_soundMenu->SetItemValue(Sound_EffectVolume, MakeVolumeString(m_effectVolume));
-	m_soundMenu->SetItemValue(Sound_MusicVolume, MakeVolumeString(m_musicVolume));
-
-
-	for ( int i = 0; i < m_controlCount; i++ )
-		m_controlMenu->SetItemValue(i, MakeControlString(i));
+	// vsSystemPreferences *p = vsSystem::Instance()->GetPreferences();
+    //
+	// vsString resolutionValue;
+	// Resolution * resArray = p->GetSupportedResolutions();
+    //
+	// resolutionValue = vsFormatString("%dx%d", resArray[m_resolution].width, resArray[m_resolution].height);
+	// if ( m_resolution > 0 )
+	// 	resolutionValue = "<" + resolutionValue;
+	// else
+	// 	resolutionValue = " " + resolutionValue;
+	// if ( m_resolution < m_resolutionCount-1 )
+	// 	resolutionValue += ">";
+    //
+	// m_screenMenu->SetItemValue(Screen_Resolution, resolutionValue);
+    //
+    //
+	// vsString fullscreenValue = m_fullscreen?"<ON>":"<OFF>";
+	// m_screenMenu->SetItemValue(Screen_Fullscreen, fullscreenValue);
+    //
+    //
+	// vsString bloomValue = m_bloom?"<ON>":"<OFF>";
+	// m_screenMenu->SetItemValue(Screen_Bloom, bloomValue);
+    //
+    //
+	// m_soundMenu->SetItemValue(Sound_EffectVolume, MakeVolumeString(m_effectVolume));
+	// m_soundMenu->SetItemValue(Sound_MusicVolume, MakeVolumeString(m_musicVolume));
+    //
+    //
+	// for ( int i = 0; i < m_controlCount; i++ )
+	// 	m_controlMenu->SetItemValue(i, MakeControlString(i));
 }
 
 void
@@ -462,8 +462,8 @@ prefGame::UpdateValues()
 
 	p->Save();
 
-	for ( int i = 0; i < m_controlCount; i++ )
-		GetInput()->SetControlMapping( s_cid[i], &m_deviceControl[i] );
+	// for ( int i = 0; i < m_controlCount; i++ )
+	// 	GetInput()->SetControlMapping( s_cid[i], &m_deviceControl[i] );
 }
 
 

@@ -8,7 +8,6 @@
  */
 
 #if !TARGET_OS_IPHONE
-#include <SDL/SDL.h>
 
 #include "Memory/VS_Heap.h"
 
@@ -22,7 +21,7 @@ int main( int argc, char* argv[] )
 	UNUSED(argc);
 	UNUSED(argv);
 
-	vsSystem *system = new vsSystem( 32 * 1024 * 1024 );
+	vsSystem *system = new vsSystem( "VectorStorm", "Testbeds", argc, argv, 32 * 1024 * 1024 );
 
 	/*  Create our game  */
 

@@ -81,7 +81,8 @@ ltGraph::SetCurveName( const vsString &curveName )
 	vsVector2D top = m_box.TopLeft();
 	top.y += 20.f;
 
-	m_curveName = new vsSprite(m_font->CreateString2D(curveName, 35.f, Justification_Left));
+	vsFontRenderer fr(m_font, 35.f);
+	m_curveName = new vsSprite(fr.DisplayList2D(curveName));
 	AddChild( m_curveName );
 	m_curveName->SetPosition( top );
 }
@@ -94,7 +95,9 @@ ltGraph::SetEquationText( const vsString &equationText )
 	vsVector2D bottom = m_box.BottomRight();
 	bottom.y -= 20.f;
 
-	m_equationText = new vsSprite(m_font->CreateString2D(equationText, 35.f, Justification_Right));
+	vsFontRenderer fr(m_font,35.f);
+	fr.SetJustificationType(Justification_Right);
+	m_equationText = new vsSprite(fr.DisplayList2D(equationText));
 	AddChild( m_equationText );
 	m_equationText->SetPosition( bottom );
 }

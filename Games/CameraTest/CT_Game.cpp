@@ -35,7 +35,10 @@ ctGame::Init()
 
 	{
 		m_font = new vsFont("FreeSerif.txt");
-		vsDisplayList *list = m_font->CreateString(FontContext_2D, "http://www.vgknowhow.com/", 30.f, Justification_Right, -1, vsColor(0.4f,0.4f,0.4f,1.f));
+		vsFontRenderer fr(m_font, 30.f);
+		fr.SetJustificationType( Justification_Right );
+		fr.SetColor( vsColor(0.4f,0.4f,0.4f,1.f) );
+		vsDisplayList *list = fr.DisplayList2D("http://www.vgknowhow.com/");
 		m_vgknowhow = new vsSprite( list );
 		m_vgknowhow->RegisterOnScene(1);
 
@@ -102,7 +105,9 @@ ctGame::SetCameraName( const vsString &cameraName )
 	tr.x -= 60.f;
 	tr.y += 60.f;
 
-	m_cameraName = new vsSprite(m_font->CreateString2D(cameraName, 35.f, Justification_Right));
+	vsFontRenderer fr(m_font, 35.f);
+	fr.SetJustificationType(Justification_Right);
+	m_cameraName = new vsSprite(fr.DisplayList2D(cameraName));
 	m_cameraName->RegisterOnScene(1);
 	m_cameraName->SetPosition( tr );
 }

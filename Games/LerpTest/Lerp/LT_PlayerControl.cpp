@@ -142,7 +142,9 @@ ltPlayerControl::SetText(float value)
 	}
 
 	m_text->ClearFragments();
-	m_text->AddFragment( m_font->CreateString_Fragment( FontContext_2D, string, 50.f, Justification_Right, -1.f, color ) );
+	vsFontRenderer fr( m_font, 50.f );
+	fr.SetJustificationType( Justification_Right );
+	m_text->AddFragment( fr.Fragment2D( string ) );
 }
 
 void

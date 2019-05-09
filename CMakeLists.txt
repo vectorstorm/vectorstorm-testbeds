@@ -10,19 +10,12 @@ endif()
 project( VectorStorm_Testbeds )
 
 add_subdirectory( vectorstorm )
-find_package(OpenGL)
-set(VS_LIBRARIES
-	${OPENGL_LIBRARIES}
-	${SDL_LIBRARY}
-	${SDL_IMAGE_LIBRARY}
-	${SDL_MIXER_LIBRARY}
-	${SDL_TTF_LIBRARY}
-	${PNG_LIBRARY}
-	${GLEW_LIBRARY}
-	${BOX2D_LIBRARY}
-	)
 
 # find . -type d
+include_directories( SYSTEM
+	${VECTORSTORM_INCLUDE_PATHS}
+	)
+
 include_directories(
 	Games
 	Games/Asteroids
@@ -251,7 +244,6 @@ endif ( UNIX )
 target_link_libraries( VectorStorm_Testbeds
 	vectorstorm
 	${PLATFORM_LIBRARIES}
-	${VS_LIBRARIES}
 	)
 
 set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
@@ -286,6 +278,13 @@ if(APPLE)
 		include(BundleUtilities)
 		fixup_bundle(\"${BUNDLE}\" \"\" \"${DIRS}\")
 		" COMPONENT Runtime)
+else(APPLE)
+	add_custom_command(TARGET VectorStorm_Testbeds
+		POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_CURRENT_BINARY_DIR}/Data
+		COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/Data/* ${CMAKE_CURRENT_BINARY_DIR}/Data
+		COMMENT "Copying Data files into place"
+		)
 
 endif(APPLE)
 

@@ -102,7 +102,7 @@ tbMap::BuildHeightField()
 			indices[id++] = MAP_INDEX(x,y);
 			indices[id++] = MAP_INDEX(x+1,y);
 		}
-		list->TriangleStrip( indices, id );
+		list->TriangleStripArray( indices, id );
 	}
 	list->SetMaterial( gAddMaterial );
 
@@ -115,7 +115,7 @@ tbMap::BuildHeightField()
 		{
 			indices[y] = MAP_INDEX(x,y);
 		}
-		list->LineStrip( indices, MAP_HEIGHT );
+		list->LineStripArray( indices, MAP_HEIGHT );
 	}
 
 	for ( int y = 0; y < MAP_HEIGHT; y++ )
@@ -124,7 +124,7 @@ tbMap::BuildHeightField()
 		{
 			indices[x] = MAP_INDEX(x,y);
 		}
-		list->LineStrip( indices, MAP_HEIGHT );
+		list->LineStripArray( indices, MAP_HEIGHT );
 	}
 
 	list->PopTransform();
@@ -196,7 +196,7 @@ tbMap::BuildHeightColumns()
 			indices[j] = top + j;
 		}
 
-		list->TriangleStrip(indices,4);
+		list->TriangleStripArray(indices,4);
 	}
 #define PSCOLOR(r,g,b,a) (vsColor(r/255.f,g/255.f,b/255.f,a))
 		// front surfaces.
@@ -223,7 +223,7 @@ tbMap::BuildHeightColumns()
 			indices[2] = bot+0;
 			indices[3] = bot+2;
 
-			list->TriangleStrip(indices,4);
+			list->TriangleStripArray(indices,4);
 		}
 	}
 
@@ -250,7 +250,7 @@ tbMap::BuildHeightColumns()
 			indices[2] = bot+2;
 			indices[3] = bot+3;
 
-			list->TriangleStrip(indices,4);
+			list->TriangleStripArray(indices,4);
 		}
 	}
 
@@ -277,7 +277,7 @@ tbMap::BuildHeightColumns()
 			indices[2] = bot+1;
 			indices[3] = bot+0;
 
-			list->TriangleStrip(indices,4);
+			list->TriangleStripArray(indices,4);
 		}
 	}
 
@@ -304,7 +304,7 @@ tbMap::BuildHeightColumns()
 			indices[2] = bot+3;
 			indices[3] = bot+1;
 
-			list->TriangleStrip(indices,4);
+			list->TriangleStripArray(indices,4);
 		}
 	}
 
@@ -485,7 +485,6 @@ tbSphere::tbSphere( int slices )
 //	vsDisplayList *list = new vsDisplayList( constructor->GetSize() );
 //	list->Append(constructor);
 
-	constructor->Compile();
 	SetDisplayList(constructor);
 
 //	vsDelete( constructor );

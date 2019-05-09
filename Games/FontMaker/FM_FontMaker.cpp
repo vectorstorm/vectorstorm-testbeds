@@ -7,6 +7,7 @@
  *
  */
 
+#if 0
 #if defined(_DEBUG)
 
 #include "FM_FontMaker.h"
@@ -37,11 +38,14 @@ fmFontMaker::Init()
 	vsFontMaker::MakeFont("Bitmap04B_03", 64);
 #endif // 0
 	m_font = new vsFont("FreeSerif.txt");
-	m_sprite = new vsSprite( m_font->CreateString2D("Behold!  A very long wrapping string!", 64.f, Justification_Center, 800.f ) );
+	vsFontRenderer fr(m_font, 64.f);
+	fr.SetJustificationType(Justification_Center);
+	fr.SetMaxWidth(800.f);
+	m_sprite = new vsSprite( fr.DisplayList2D("Behold!  A very long wrapping string!") );
 	m_sprite->RegisterOnScene(0);
 	m_sprite->SetPosition( vsVector2D(0.f,0.f) );
 	m_sprite->SetColor( vsColor::LightGreen );
-	
+
 	vsDisplayList *list = new vsDisplayList(1024);
 	list->MoveTo(vsVector2D(-400.f,-64.f));
 	list->LineTo(vsVector2D(400.f,-64.f));
@@ -56,15 +60,15 @@ fmFontMaker::Init()
 	m_other->RegisterOnScene(0);
 	m_other->SetPosition( vsVector2D(0.f,100.f) );
 	m_other->SetColor( vsColor::LightBlue );
-	
+
 	m_fontC = new vsFont("FreeMonoOblique.txt");
 	m_final = new vsSprite( m_fontC->CreateString2D("in VectorStorm!", 60.f, Justification_Center ) );
 	m_final->RegisterOnScene(0);
 	m_final->SetAngle( DEGREES(-10.f) );
 	m_final->SetPosition( vsVector2D(0.f,120.f) );
 	m_final->SetColor( vsColor::Red );
-	 
-	
+
+
 	m_muncher = new vsSprite( vsDisplayList::Load("Muncher") );
 	m_muncher->SetPosition( vsVector2D(200.f,20.f) );
 	m_muncher->RegisterOnScene(0);
@@ -90,4 +94,5 @@ fmFontMaker::Update( float timeStep )
 	Parent::Update(timeStep);
 }
 
+#endif
 #endif

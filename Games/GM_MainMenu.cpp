@@ -23,35 +23,35 @@ vsSprite *s_modeSprite = NULL;
 
 static void BuildModeSprite()
 {
-#if !TARGET_OS_IPHONE
-#if defined(_DEBUG)
-
-	if ( s_modeSprite )
-		vsDelete(s_modeSprite);
-
-	extern bool g_renderSceneTexture;
-	extern bool g_renderOffscreenTexture;
-	extern int g_renderOffscreenTextureId;
-
-	if ( g_renderOffscreenTexture )
-		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(vsFormatString("Blur #%d",g_renderOffscreenTextureId), 30.f, 30.f));
-	else if ( g_renderSceneTexture )
-	{
-		vsString nobloomString = vsLocalisationTable::Instance()->GetTranslation("TEXT_NO_BLOOM");
-		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(nobloomString, 30.f, 30.f) );
-	}
-	else
-	{
-		vsString bloomString = vsLocalisationTable::Instance()->GetTranslation("TEXT_BLOOM");
-		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(bloomString, 30.f, 30.f) );
-	}
-
-	s_modeSprite->SetColor(vsColor::White);
-	s_modeSprite->SetPosition(vsVector2D(0.f,-400.f));
-	s_modeSprite->RegisterOnScene(0);
-
-#endif //_DEBUG
-#endif // TARGET_OS_IPHONE
+// #if !TARGET_OS_IPHONE
+// #if defined(_DEBUG)
+//
+// 	if ( s_modeSprite )
+// 		vsDelete(s_modeSprite);
+//
+// 	extern bool g_renderSceneTexture;
+// 	extern bool g_renderOffscreenTexture;
+// 	extern int g_renderOffscreenTextureId;
+//
+// 	if ( g_renderOffscreenTexture )
+// 		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(vsFormatString("Blur #%d",g_renderOffscreenTextureId), 30.f, 30.f));
+// 	else if ( g_renderSceneTexture )
+// 	{
+// 		vsString nobloomString = vsLocalisationTable::Instance()->GetTranslation("TEXT_NO_BLOOM");
+// 		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(nobloomString, 30.f, 30.f) );
+// 	}
+// 	else
+// 	{
+// 		vsString bloomString = vsLocalisationTable::Instance()->GetTranslation("TEXT_BLOOM");
+// 		s_modeSprite = new vsSprite( vsBuiltInFont::CreateString(bloomString, 30.f, 30.f) );
+// 	}
+//
+// 	s_modeSprite->SetColor(vsColor::White);
+// 	s_modeSprite->SetPosition(vsVector2D(0.f,-400.f));
+// 	s_modeSprite->RegisterOnScene(0);
+//
+// #endif //_DEBUG
+// #endif // TARGET_OS_IPHONE
 }
 
 /*
@@ -264,38 +264,38 @@ gmMainMenu::Update(float timeStep)
 	if ( input->WasPressed( CID_A ) )
 		core::SetGame( coreGameRegistry::GetGame(m_selection) );
 
-#if !TARGET_OS_IPHONE
-#if defined(_DEBUG)
-	if ( input->WasPressed( CID_B ) )
-	{
-		extern bool g_renderSceneTexture;
-		extern bool g_renderOffscreenTexture;
-		extern int g_renderOffscreenTextureId;
-
-		if ( g_renderOffscreenTexture )
-		{
-			g_renderOffscreenTextureId++;
-			if ( g_renderOffscreenTextureId >= 3 )
-			{
-				g_renderSceneTexture = false;
-				g_renderOffscreenTexture = false;
-				g_renderOffscreenTextureId = 0;
-			}
-		}
-		else if ( g_renderSceneTexture )
-		{
-			g_renderSceneTexture = false;
-			g_renderOffscreenTexture = true;
-			g_renderOffscreenTextureId = 0;
-		}
-		else
-		{
-			g_renderSceneTexture = true;
-		}
-		BuildModeSprite();
-	}
-#endif // _DEBUG
-#endif // TARGET_OS_IPHONE
+// #if !TARGET_OS_IPHONE
+// #if defined(_DEBUG)
+// 	if ( input->WasPressed( CID_B ) )
+// 	{
+// 		extern bool g_renderSceneTexture;
+// 		extern bool g_renderOffscreenTexture;
+// 		extern int g_renderOffscreenTextureId;
+//
+// 		if ( g_renderOffscreenTexture )
+// 		{
+// 			g_renderOffscreenTextureId++;
+// 			if ( g_renderOffscreenTextureId >= 3 )
+// 			{
+// 				g_renderSceneTexture = false;
+// 				g_renderOffscreenTexture = false;
+// 				g_renderOffscreenTextureId = 0;
+// 			}
+// 		}
+// 		else if ( g_renderSceneTexture )
+// 		{
+// 			g_renderSceneTexture = false;
+// 			g_renderOffscreenTexture = true;
+// 			g_renderOffscreenTextureId = 0;
+// 		}
+// 		else
+// 		{
+// 			g_renderSceneTexture = true;
+// 		}
+// 		BuildModeSprite();
+// 	}
+// #endif // _DEBUG
+// #endif // TARGET_OS_IPHONE
 
 	m_pulseTimer += timeStep;
 	if ( m_pulseTimer > PULSE_DURATION )
