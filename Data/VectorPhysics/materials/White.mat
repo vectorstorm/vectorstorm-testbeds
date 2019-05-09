@@ -1,0 +1,10 @@
+Material{
+	name white
+	mode add
+	color 1.0 1.0 1.0 1.0
+	culling none
+	zread true
+	zwrite false
+	glow true
+}
+

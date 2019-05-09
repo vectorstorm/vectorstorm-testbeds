@@ -110,7 +110,7 @@ sstRocket::Update( float timeStep )
 		{
 			int hoseCount = (int)m_hose;
 			m_hose -= hoseCount;
-			m_gameMode->SpawnImmediate( hoseCount, GetPosition() /*+ vsVector2D(0.0f,5.0f)*/, -m_velocity, vsColor(0.2f,0.2f,0.2f,1.0f), 1.0f );
+			m_gameMode->SpawnImmediate( hoseCount, GetPosition() /*+ vsVector2D(0.0f,5.0f)*/, -m_velocity, vsColor(1.0f,1.0f,1.0f,1.0f), 1.0f );
 		}
 	}
 	else

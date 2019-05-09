@@ -1,10 +1,7 @@
 Material{
-	name white
-	mode normal
+	mode lit
 	color 1.0 1.0 1.0 1.0
-	culling none
-	zread true
-	zwrite false
+	culling back
 	texture "Dirt.png"
 	glow false
 }
